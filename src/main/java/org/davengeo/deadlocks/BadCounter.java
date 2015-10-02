@@ -8,10 +8,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.stream.IntStream;
-
-import static com.google.common.collect.Lists.newArrayList;
 
 @Order(1)
 @Component
@@ -38,16 +35,9 @@ public class BadCounter implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         LOG.info("here we are");
 
-
-        List<Runnable> workers = newArrayList();
         IntStream.range(1, 4).forEach(i -> {
-            workers.add(first);
+            executor.execute(first);
         });
-
-        workers.forEach(worker -> {
-            executor.execute(worker);
-        });
-        Thread.sleep(100l);
         flag.green();
         Thread.sleep(500l);
         LOG.info("final counter:{}", counter.getCounter());
