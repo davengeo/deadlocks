@@ -22,4 +22,5 @@ public class RedGreenFlag {
     public void green() {
         flag.countDown();
     }
+
 }

@@ -16,7 +16,7 @@ public class DeadlocksApplication {
     @Bean
     TaskExecutor taskExecutor() {
         ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
-        threadPoolTaskExecutor.setCorePoolSize(10);
+        threadPoolTaskExecutor.setCorePoolSize(100);
         threadPoolTaskExecutor.setThreadNamePrefix("deadlock*");
         return threadPoolTaskExecutor;
     }
