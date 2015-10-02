@@ -23,23 +23,24 @@ public class BadCounter implements CommandLineRunner {
 
     Counter counter = new Counter();
 
-    Runnable first = () -> {
-        flag.waitForGreen();
-        IntStream.range(0, 100).forEach( i -> {
-            counter.increment();
-        });
-        LOG.info("counter:{}", counter.getCounter());
-    };
-
     @Override
     public void run(String... strings) throws Exception {
-        LOG.info("here we are");
 
         IntStream.range(1, 4).forEach(i -> {
-            executor.execute(first);
+            executor.execute(() -> {
+
+                flag.waitForGreen();
+
+                IntStream.range(0, 100).forEach(j -> {
+                    counter.increment();
+                });
+                LOG.info("counter:{}", counter.getCounter());
+            });
         });
+
         flag.green();
         Thread.sleep(500l);
+
         LOG.info("final counter:{}", counter.getCounter());
     }
 
