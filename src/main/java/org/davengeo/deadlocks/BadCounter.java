@@ -42,6 +42,7 @@ public class BadCounter implements CommandLineRunner {
         Thread.sleep(500l);
 
         LOG.info("final counter:{}", counter.getCounter());
+        LOG.info("but should be:{}", 300);
     }
 
     class Counter {
